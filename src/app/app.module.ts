@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TourComponent } from './visualization/tour/tour.component';
+import { RoomListComponent } from './visualization/room-list/room-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TourComponent
+    TourComponent,
+    RoomListComponent
   ],
   imports: [
     BrowserModule

@@ -1,0 +1,36 @@
+@import '../../../css/_variables.scss';
+
+.room {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-gap: 8px;
+  margin-top: 8px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.room:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.room-active {
+  border: 2px solid white;
+}
+
+.room-image {
+  width: 100%;
+}
+
+.room-description {
+  color: white;
+}
+
+.room-list {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
+  padding: 15px;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.70);
+}

@@ -6,12 +6,13 @@ import {
   PerspectiveCamera,
   Scene,
   SphereBufferGeometry,
-  TextureLoader, Vector2,
+  TextureLoader, Vector2, Vector3,
   WebGLRenderer
 } from 'three';
 import {BaseComponent} from '../../utility/BaseComponent';
 import {OrbitControls} from 'three-orbitcontrols-ts';
 import {ArrowController} from './arrow.controller';
+import {ArrowModel} from '../../models/tour.model';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class TourComponent extends BaseComponent implements OnInit {
   arrowController: ArrowController;
 
   tooltipPos: Vector2 = new Vector2(0, 0);
-  hideTooltip = false;
+  hideTooltip = true;
 
   constructor() {
     super();
@@ -71,17 +72,14 @@ export class TourComponent extends BaseComponent implements OnInit {
     this.scene.add(sphereMesh);
     this.onResize();
     this.onRender();
+
     this.arrowController = new ArrowController(this.textureLoader, this.scene, this.camera);
-    this.arrowController.registerArrowHoverCallback((arrow, pos) => {
-      if (!arrow) {
-        this.hideTooltip = true;
-      } else {
-        this.hideTooltip = false;
-        this.tooltipPos = pos;
-        this.tooltipPos.y += 20;
-      }
-    });
+    this.arrowController.registerArrowHoverCallback((arrow, position) => this.onArrowHover(arrow, position));
+    this.arrowController.registerArrowClickCallback((arrow) => this.onArrowClick(arrow));
     window.addEventListener('resize', () => this.onResize());
+
+
+    this.testMethod();
   }
 
   update() {
@@ -111,6 +109,24 @@ export class TourComponent extends BaseComponent implements OnInit {
         this.onRender();
       });
     }, 1000 / 30);
+  }
+
+  onArrowHover(arrow: ArrowModel | any, position: Vector2) {
+    if (!arrow) {
+      this.hideTooltip = true;
+    } else {
+      this.hideTooltip = false;
+      this.tooltipPos = position;
+      this.tooltipPos.y += 20;
+    }
+  }
+
+  onArrowClick(arrow: ArrowModel | any) {
+    console.log(arrow);
+  }
+
+  testMethod() {
+    this.arrowController.generateArrows([new ArrowModel(new Vector3(2.0937781598128997, -0.02081703820055982, -19.888048431057978))]);
   }
 
 }
