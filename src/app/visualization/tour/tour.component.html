@@ -1,1 +1,5 @@
-<canvas #canvasElement class="canvas-element"></canvas>
+<div class="parent-canvas">
+  <canvas #canvasElement class="canvas-element"></canvas>
+  <div class="tooltiptext" *ngIf="!hideTooltip" [style.top.px]="tooltipPos.y" [style.left.px]="tooltipPos.x">Testowa strzałka</div>
+</div>
+

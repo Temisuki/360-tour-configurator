@@ -1,8 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-$primary-color: #f0f7f4;
-$secondary-color: #32292f;
-$distinct-color: #99e1d9;
+@import './css/_variables.scss';
 
 body {
   margin: 0;

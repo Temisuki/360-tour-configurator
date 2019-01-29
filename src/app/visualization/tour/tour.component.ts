@@ -6,7 +6,7 @@ import {
   PerspectiveCamera,
   Scene,
   SphereBufferGeometry,
-  TextureLoader,
+  TextureLoader, Vector2,
   WebGLRenderer
 } from 'three';
 import {BaseComponent} from '../../utility/BaseComponent';
@@ -32,6 +32,9 @@ export class TourComponent extends BaseComponent implements OnInit {
   sphereMaterial: MeshBasicMaterial;
 
   arrowController: ArrowController;
+
+  tooltipPos: Vector2 = new Vector2(0, 0);
+  hideTooltip = false;
 
   constructor() {
     super();
@@ -69,6 +72,15 @@ export class TourComponent extends BaseComponent implements OnInit {
     this.onResize();
     this.onRender();
     this.arrowController = new ArrowController(this.textureLoader, this.scene, this.camera);
+    this.arrowController.registerArrowHoverCallback((arrow, pos) => {
+      if (!arrow) {
+        this.hideTooltip = true;
+      } else {
+        this.hideTooltip = false;
+        this.tooltipPos = pos;
+        this.tooltipPos.y += 20;
+      }
+    });
     window.addEventListener('resize', () => this.onResize());
   }
 
