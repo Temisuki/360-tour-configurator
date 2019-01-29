@@ -7,13 +7,15 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RoomListComponent } from './visualization/room-list/room-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TourComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    RoomListComponent
   ],
   imports: [
     BrowserModule,

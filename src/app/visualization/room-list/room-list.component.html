@@ -1,0 +1,18 @@
+<div class="room-list">
+  <div class="room">
+      <div>
+        <img src="assets/test.jpg" class="room-image" alt=" ">
+      </div>
+      <div class="room-description">
+        {{ (str.length>6)? (str | slice:0:30) +'..':(str) }}
+      </div>
+    </div>
+  <div class="room room-active">
+    <div>
+      <img src="assets/test.jpg" class="room-image" alt=" ">
+    </div>
+    <div class="room-description">
+      {{ (str.length>6)? (str | slice:0:30) +'..':(str) }}
+    </div>
+  </div>
+</div>
