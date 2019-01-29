@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  MINIMUM_PASSWORD_LENGTH: 8
+  MINIMUM_PASSWORD_LENGTH: 8,
+  ip: 'YOUR_BACKEND_IP'
 };
 
 /*
