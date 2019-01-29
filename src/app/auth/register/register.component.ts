@@ -5,6 +5,7 @@ import {BaseComponent} from '../../utility/BaseComponent';
 import {MatchPasswordValidator} from '../../utility/Utilities';
 import {UserModel} from '../../models/user.model';
 import {ActivatedRoute} from '@angular/router';
+import {NavigatorService} from '../../utility/navigator.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RegisterComponent extends BaseComponent implements OnInit, OnDestroy  {
 
-  constructor(protected route: ActivatedRoute) {
+  constructor(protected route: ActivatedRoute,
+              protected navigator: NavigatorService) {
     super();
   }
   form: FormGroup;
@@ -61,5 +63,9 @@ export class RegisterComponent extends BaseComponent implements OnInit, OnDestro
   invalidEmail(): boolean {
     const username = this.form.get('username');
     return username.touched && !username.valid && username.dirty && username.value.length > 0;
+  }
+
+  toLogin() {
+    this.navigator.toLoginScreen();
   }
 }

@@ -6,27 +6,29 @@
       <div class="title-text">Sign up</div>
       <form class="input-box" [formGroup]="form" (ngSubmit)="register()">
         <div *ngIf="isFailed || invalidPasswords() || diffrentPasswords() || invalidEmail()" class="alert">
-          <div class="alert-danger alert">
-          <span *ngIf="isFailed">{{errorMessage}}<br></span>
+          <span *ngIf="isFailed">
+          <div class="input-group registerForm alert-danger">
+            {{errorMessage}}
+          </div>
+          </span>
           <span *ngIf="invalidPasswords()">
             <br>
-            <div class="input-group registerForm">
-            Password must be at least 8 characters.
+            <div class="input-group registerForm alert-danger">
+            Password must be at least 8 characters long.
             </div>
           </span>
           <span *ngIf="invalidEmail()">
             <br>
-            <div class="input-group registerForm">
+            <div class="input-group registerForm alert-danger">
             E-mail is not valid, please provide valid E-mail<br>
             </div>
           </span>
           <span *ngIf="diffrentPasswords()">
             <br>
-            <div class="input-group registerForm">
+            <div class="input-group registerForm alert-danger">
             Passwords must be the same
-            </div><br>
+            </div>
           </span>
-          </div>
         </div>
         <div *ngIf="!isFailed && !invalidPasswords() && !diffrentPasswords() && !invalidEmail()" class="alert">
           <span>
@@ -53,11 +55,11 @@
           </div>
         </div>
         <div class="input-group registerForm">
-          <button type="submit" [disabled]="!form.valid" class="btn btn-primary register-button">Submit</button>
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary register-button">Sign up</button>
         </div>
         <div class="bottom-text">
           Already have an account?
-          <span class="sign-in">Sign in</span>
+          <span class="sign-in" (click)="toLogin()">Log in</span>
         </div>
       </form>
     </div>

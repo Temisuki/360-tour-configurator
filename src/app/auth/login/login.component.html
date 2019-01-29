@@ -1,3 +1,52 @@
-<p>
-  login works!
-</p>
+<div class="col-md-12 col-lg-12 col-sm-8 loader login-loader" *ngIf="isLoading"></div>
+<div *ngIf="!isLoading">
+  <div class="container">
+    <div class="box">
+      <div class="stripe"></div>
+      <div class="title-text">Log in</div>
+      <form class="input-box" [formGroup]="form" (ngSubmit)="login()" (change)="inputChange($event)">
+        <div *ngIf="isFailed || isPasswordDirty() || isEmailDirty()" class="alert">
+          <span *ngIf="isFailed">
+          <div class="input-group registerForm alert-danger">
+            {{errorMessage}}
+          </div>
+          </span>
+          <span *ngIf="isPasswordDirty()">
+            <br>
+            <div class="input-group registerForm alert-danger">
+            Password must be at least 8 characters long.
+            </div>
+          </span>
+          <span *ngIf="isEmailDirty()">
+            <br>
+            <div class="input-group registerForm alert-danger">
+            E-mail is not valid, please provide valid E-mail<br>
+            </div>
+          </span>
+        </div>
+        <div *ngIf="!isFailed && !isPasswordDirty() && !isEmailDirty()" class="alert">
+          <span>
+            <div class="input-group registerForm">
+          In order to register log in please provide your E-mail address and password.
+          </div>
+          </span>
+        </div>
+        <div class="input-group loginForm">
+          <input autocomplete="username" formControlName="email" type="text" name="email" id="email"
+                 placeholder="E-mail" class="form-control"/>
+        </div>
+        <div class="input-group loginForm">
+          <input autocomplete="current-password" formControlName="password" type="password" name="password"
+                 id="password" placeholder="Password" class="form-control"/>
+        </div>
+        <div class="input-group loginForm">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary login-button">Log in</button>
+        </div>
+        <div class="bottom-text">
+          Not a member?
+          <span class="sign-in" (click)="toRegister()">Sign up now</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

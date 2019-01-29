@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {TourComponent} from './visualization/tour/tour.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 // TODO Page guard
 const appRoutes: Routes = [
@@ -10,6 +11,7 @@ const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'tour', component: TourComponent},
+  {path: 'dashboard', component: DashboardComponent},
   {path: '**', redirectTo: '/tour'},
 ];
 

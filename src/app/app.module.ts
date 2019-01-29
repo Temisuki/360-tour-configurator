@@ -8,6 +8,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RoomListComponent } from './visualization/room-list/room-list.component';
+import {NavigatorService} from './utility/navigator.service';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,8 @@ import { RoomListComponent } from './visualization/room-list/room-list.component
     TourComponent,
     RegisterComponent,
     LoginComponent,
-    RoomListComponent
+    RoomListComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { RoomListComponent } from './visualization/room-list/room-list.component
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [NavigatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
