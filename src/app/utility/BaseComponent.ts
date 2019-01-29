@@ -2,6 +2,8 @@ import {Subscription} from 'rxjs';
 
 export class BaseComponent {
   isLoading = false;
+  isFailed = false;
+  errorMessage = '';
   subscriptions: Subscription[];
 
   constructor() {
