@@ -14,7 +14,7 @@ import { RoomListComponent } from './visualization/room-list/room-list.component
     AppComponent,
     TourComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
     RoomListComponent
   ],
   imports: [
