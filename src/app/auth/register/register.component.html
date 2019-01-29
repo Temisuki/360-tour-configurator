@@ -1,0 +1,66 @@
+<div class="col-md-12 col-lg-12 col-sm-8 loader login-loader" *ngIf="isLoading"></div>
+<div *ngIf="!isLoading">
+  <div class="container">
+    <div class="box">
+      <div class="stripe"></div>
+      <div class="title-text">Sign up</div>
+      <form class="input-box" [formGroup]="form" (ngSubmit)="register()">
+        <div *ngIf="isFailed || invalidPasswords() || diffrentPasswords() || invalidEmail()" class="alert">
+          <div class="alert-danger alert">
+          <span *ngIf="isFailed">{{errorMessage}}<br></span>
+          <span *ngIf="invalidPasswords()">
+            <br>
+            <div class="input-group registerForm">
+            Password must be at least 8 characters.
+            </div>
+          </span>
+          <span *ngIf="invalidEmail()">
+            <br>
+            <div class="input-group registerForm">
+            E-mail is not valid, please provide valid E-mail<br>
+            </div>
+          </span>
+          <span *ngIf="diffrentPasswords()">
+            <br>
+            <div class="input-group registerForm">
+            Passwords must be the same
+            </div><br>
+          </span>
+          </div>
+        </div>
+        <div *ngIf="!isFailed && !invalidPasswords() && !diffrentPasswords() && !invalidEmail()" class="alert">
+          <span>
+            <div class="input-group registerForm">
+          In order to register new account please provide your E-mail address.
+          </div>
+          </span>
+          <span>
+            <div class="input-group registerForm">
+          Then create new password and repeat it in the next field.
+          </div>
+          </span>
+
+        </div>
+        <div class="input-group registerForm">
+          <input autocomplete="username" formControlName="username" type="text" name="username" id="username" placeholder="E-mail" class="form-control"/>
+        </div>
+        <div [formGroup]="form.get('passwords')">
+          <div class="input-group registerForm">
+            <input autocomplete="new-password" formControlName="password" type="password" name="password" id="password" placeholder="Password" class="form-control"/>
+          </div>
+          <div class="input-group registerForm">
+            <input autocomplete="repeat-password" formControlName="repeat" type="password" name="repeat" id="repeat" placeholder="Repeat password" class="form-control"/>
+          </div>
+        </div>
+        <div class="input-group registerForm">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary register-button">Submit</button>
+        </div>
+        <div class="bottom-text">
+          Already have an account?
+          <span class="sign-in">Sign in</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
