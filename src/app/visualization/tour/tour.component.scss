@@ -4,6 +4,12 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  background-image:
+    radial-gradient(
+        circle closest-side,
+        #ffffff,
+        #cdcdcd
+    );
 }
 
 .tooltiptext {

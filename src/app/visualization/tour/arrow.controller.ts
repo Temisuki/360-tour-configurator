@@ -1,5 +1,17 @@
-import {Camera, Raycaster, Scene, Sprite, SpriteMaterial, Texture, TextureLoader, Vector2, Vector3} from 'three';
-import {ArrowModel} from '../../models/tour.model';
+import {
+  Camera,
+  Mesh, MeshBasicMaterial,
+  Raycaster,
+  Scene,
+  SphereBufferGeometry,
+  Sprite,
+  SpriteMaterial,
+  Texture,
+  TextureLoader,
+  Vector2,
+  Vector3
+} from 'three';
+import {ArrowModel, RoomModel} from '../../models/tour.model';
 
 export class ArrowController {
 
@@ -45,13 +57,16 @@ export class ArrowController {
     this.arrowList = [];
   }
 
-  private arrowBuilder(arrows: ArrowModel[]): void {
+  private arrowBuilder(arrows: ArrowModel[], newArrow?: boolean): void {
     arrows.forEach(arrow => {
       const sprite = new Sprite(this.arrowMaterial);
-      const pos = arrow.position;
-      pos.applyQuaternion(this.camera.quaternion);
+      const pos = new Vector3(arrow.position.x, arrow.position.y, arrow.position.z);
+      if (newArrow) {
+        pos.applyQuaternion(this.camera.quaternion);
+      }
       sprite.position.copy(pos);
       this.scene.add(sprite);
+      arrow.arrowModelId = sprite.id;
       this.arrowList.push(sprite);
     });
   }
@@ -72,24 +87,24 @@ export class ArrowController {
     }
   }
 
-  onArrowHover(arrow: ArrowModel | any, pos): void {
+  onArrowHover(arrowModelId: number, pos): void {
     this.onArrowHovers.forEach(cb => {
-      cb(arrow, pos);
+      cb(arrowModelId, pos);
     });
   }
 
-  registerArrowHoverCallback(arrowCallback: (arrow: ArrowModel, pos: Vector2) => void): void {
+  registerArrowHoverCallback(arrowCallback: (arrowModelId: number, pos: Vector2) => void): void {
     this.onArrowHovers.push(arrowCallback);
   }
 
-  registerArrowClickCallback(arrowClickCallback: (arrow: ArrowModel | any) => void): void {
+  registerArrowClickCallback(arrowClickCallback: (arrowModelId: number) => void): void {
     this.onArrowClicks.push(arrowClickCallback);
   }
 
   onMouseMove(event): void {
     const intersects = this.getIntersects(event);
-    intersects.forEach(object => {
-      this.onArrowHover(object, new Vector2(event.clientX, event.clientY));
+    intersects.forEach(intersect => {
+      this.onArrowHover(intersect['object'].id, new Vector2(event.clientX, event.clientY));
     });
     if (intersects.length === 0) {
       this.onArrowHover(null, null);
@@ -101,7 +116,7 @@ export class ArrowController {
     if (intersects.length > 0) {
       intersects.forEach(intersect => {
         this.onArrowClicks.forEach(callback => {
-          callback(intersect);
+          callback(intersect['object'].id);
         });
       });
     }
@@ -114,20 +129,31 @@ export class ArrowController {
     return this.raycaster.intersectObjects(this.arrowList);
   }
 
+  getIntersectWorld(event: MouseEvent) {
+    this.mousePos.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    this.mousePos.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+    this.raycaster.setFromCamera(this.mousePos, this.camera);
+    return this.raycaster.intersectObjects(this.scene.children);
+  }
+
   addArrow(): void {
     if (!this.arrowMaterial) {
       this.loadMaterial(() => {
-        this.arrowBuilder([new ArrowModel(new Vector3(0, 0, -20))]);
+        // this.arrowBuilder([new ArrowModel(new Vector3(0, 0, -20))], true);
       });
     } else {
-      this.arrowBuilder([new ArrowModel(new Vector3(0, 0, -20))]);
+      // this.arrowBuilder([new ArrowModel(new Vector3(0, 0, -20))], true);
     }
-    // const sprite = new Sprite(this.arrowMaterial);
-    // const pos = new Vector3(0, 0, -20);
-    // pos.applyQuaternion(this.camera.quaternion);
-    // sprite.position.copy(pos);
-    // this.scene.add(sprite);
-    // this.arrowList.push(sprite);
+  }
+
+  addArrowAtPos(pos: Vector3, id: string, room: RoomModel): void {
+    const sprite = new Sprite(this.arrowMaterial);
+    sprite.position.copy(pos);
+    sprite.lookAt(new Vector3(0, 0, 0));
+    this.scene.add(sprite);
+    room.arrows.push(new ArrowModel(sprite.position, id, sprite.id));
+    this.arrowList.push(sprite);
+    // this.arrowBuilder([new ArrowModel(pos)], true);
   }
 
   update(): void {

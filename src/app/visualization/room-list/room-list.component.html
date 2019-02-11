@@ -1,18 +1,10 @@
 <div class="room-list">
-  <div class="room">
+  <div class="room" draggable="true" (dragstart)="dragStart($event, room)" *ngFor="let room of roomList">
       <div>
-        <img src="assets/test.jpg" class="room-image" alt=" ">
+        <img [src]="room?.thumbnail" class="room-image" alt=" ">
       </div>
       <div class="room-description">
-        {{ (str.length>6)? (str | slice:0:30) +'..':(str) }}
+        {{ (room?.name?.length>6)? (room?.name | slice:0:30) +'..':(room?.name) }}
       </div>
     </div>
-  <div class="room room-active">
-    <div>
-      <img src="assets/test.jpg" class="room-image" alt=" ">
-    </div>
-    <div class="room-description">
-      {{ (str.length>6)? (str | slice:0:30) +'..':(str) }}
-    </div>
-  </div>
 </div>

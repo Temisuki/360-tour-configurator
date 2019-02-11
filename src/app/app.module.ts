@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { AppRoutingModule } from './/app-routing.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RoomListComponent } from './visualization/room-list/room-list.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RoomListComponent } from './visualization/room-list/room-list.component
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

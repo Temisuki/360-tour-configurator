@@ -13,15 +13,19 @@ export class RoomModel {
   description: string;
   photo: string;
   thumbnail: string;
+  first: boolean;
   arrows: ArrowModel[];
 }
 
 export class ArrowModel {
   id: string;
   position: Vector3;
-  destination: number;
+  destination: string;
+  arrowModelId: number;
 
-  constructor(position: Vector3) {
+  constructor(position: Vector3, destination: string, arrowModelId: number) {
+    this.destination = destination;
+    this.arrowModelId = arrowModelId;
     this.position = position;
   }
 }

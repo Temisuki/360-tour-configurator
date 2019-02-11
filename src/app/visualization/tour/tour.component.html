@@ -1,6 +1,6 @@
 <div class="parent-canvas">
-  <canvas #canvasElement class="canvas-element"></canvas>
-  <div class="tooltiptext" *ngIf="!hideTooltip" [style.top.px]="tooltipPos.y" [style.left.px]="tooltipPos.x">Testowa strzałka</div>
-  <app-room-list></app-room-list>
+  <canvas #canvasElement class="canvas-element" (drop)="drop($event)" (dragover)="allowDrop($event)"></canvas>
+  <div class="tooltiptext" *ngIf="!hideTooltip" [style.top.px]="tooltipPos.y" [style.left.px]="tooltipPos.x">{{tooltipText}}</div>
+  <app-room-list *ngIf="tour" [roomList]="tour?.rooms"></app-room-list>
 </div>
 

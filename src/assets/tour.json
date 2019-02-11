@@ -1,0 +1,45 @@
+{
+  "id": "TESTTOUR",
+  "rooms": [
+    {
+      "id": "MONGOID1",
+      "first": true,
+      "name": "ROOM NO.1",
+      "description": "ROOM NO.1",
+      "photo": "/assets/test.jpg",
+      "thumbnail": "/assets/test.jpg",
+      "arrows": [
+        {
+          "id": "MONGOID1",
+          "position": {
+            "x": 2.0937781598128997,
+            "y": -0.02081703820056104,
+            "z": -19.888048431057978
+          },
+          "destination": "MONGOID2"
+        }
+      ]
+    },
+    {
+      "id": "MONGOID2",
+      "name": "ROOM NO.2",
+      "first": false,
+      "description": "ROOM NO.2",
+      "photo": "/assets/test2.jpg",
+      "thumbnail": "/assets/test2.jpg",
+      "arrows": [
+        {
+          "id": "MONGOID2",
+          "position": {
+            "x": 2.0937781598128997,
+            "y": -0.02081703820056104,
+            "z": -19.888048431057978
+          },
+          "destination": "MONGOID1"
+        }
+      ]
+    }
+  ],
+  "name": "First testing tour",
+  "description": "Hey ho, its our first tour! Great!"
+}
